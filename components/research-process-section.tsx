@@ -2,12 +2,12 @@
 
 import { useCallback, useState } from 'react'
 
-import type { ReasoningPart } from '@ai-sdk/provider-utils'
 import { UseChatHelpers } from '@ai-sdk/react'
 import { ChevronDown } from 'lucide-react'
 
 import type {
   DataPart as UIDataPart,
+  ReasoningPart,
   ToolPart,
   UIDataTypes,
   UIMessage,

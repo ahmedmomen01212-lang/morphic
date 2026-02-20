@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
-import type { ReasoningPart } from '@ai-sdk/provider-utils'
-
 import { cn } from '@/lib/utils'
+import type { ReasoningPart } from '@/lib/types/ai'
 
 import { useArtifact } from '@/components/artifact/artifact-context'
 

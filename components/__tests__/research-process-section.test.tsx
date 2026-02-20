@@ -1,10 +1,9 @@
 import React from 'react'
 
-import type { ReasoningPart } from '@ai-sdk/provider-utils'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, Mock, test, vi } from 'vitest'
 
-import type { ToolPart, UIMessage } from '@/lib/types/ai'
+import type { ReasoningPart, ToolPart, UIMessage } from '@/lib/types/ai'
 
 import { ResearchProcessSection } from '../research-process-section'
 
