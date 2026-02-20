@@ -1,5 +1,7 @@
-import type { ReasoningPart, TextPart } from '@ai-sdk/provider-utils'
 import type { InferUITool, UIMessage as AIMessage } from 'ai'
+
+export type TextPart = { type: 'text'; text: string }
+export type ReasoningPart = { type: 'reasoning'; text: string }
 
 import { fetchTool } from '@/lib/tools/fetch'
 import { askQuestionTool } from '@/lib/tools/question'
