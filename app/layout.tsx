@@ -57,12 +57,19 @@ export default async function RootLayout({
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
+  console.log('[v0] Layout rendering, supabaseUrl:', !!supabaseUrl, 'supabaseAnonKey:', !!supabaseAnonKey)
+
   if (supabaseUrl && supabaseAnonKey) {
-    const supabase = await createClient()
-    const {
-      data: { user: supabaseUser }
-    } = await supabase.auth.getUser()
-    user = supabaseUser
+    try {
+      const supabase = await createClient()
+      const {
+        data: { user: supabaseUser }
+      } = await supabase.auth.getUser()
+      user = supabaseUser
+      console.log('[v0] Layout user:', user?.id ?? 'null')
+    } catch (error) {
+      console.error('[v0] Layout supabase error:', error)
+    }
   }
 
   return (
