@@ -68,7 +68,10 @@ export async function createEphemeralChatStreamResponse(
   const stream = createUIMessageStream<UIMessage>({
     execute: async ({ writer }: { writer: UIMessageStreamWriter }) => {
       try {
-        const isOpenAI = `${model.providerId}:${model.id}`.startsWith('openai:')
+        const modelId = `${model.providerId}:${model.id}`
+        const isOpenAI =
+          modelId.startsWith('openai:') ||
+          modelId.startsWith('gateway:openai/')
         const messagesToConvert = isOpenAI
           ? stripReasoningParts(messages)
           : messages

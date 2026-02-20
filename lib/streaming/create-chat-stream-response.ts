@@ -139,7 +139,9 @@ export async function createChatStreamResponse(
         // For OpenAI models, strip reasoning parts from UIMessages before conversion
         // OpenAI's Responses API requires reasoning items and their following items to be kept together
         // See: https://github.com/vercel/ai/issues/11036
-        const isOpenAI = context.modelId.startsWith('openai:')
+        const isOpenAI =
+          context.modelId.startsWith('openai:') ||
+          context.modelId.startsWith('gateway:openai/')
         const messagesToConvert = isOpenAI
           ? stripReasoningParts(messagesToModel)
           : messagesToModel
