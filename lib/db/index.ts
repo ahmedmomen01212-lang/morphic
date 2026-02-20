@@ -13,23 +13,25 @@ const isTest = process.env.NODE_ENV === 'test'
 if (
   !process.env.DATABASE_URL &&
   !process.env.DATABASE_RESTRICTED_URL &&
+  !process.env.POSTGRES_URL &&
   !isTest
 ) {
   throw new Error(
-    'DATABASE_URL or DATABASE_RESTRICTED_URL environment variable is not set'
+    'DATABASE_URL, DATABASE_RESTRICTED_URL, or POSTGRES_URL environment variable is not set'
   )
 }
 
 // Connection with connection pooling for server environments
-// Prefer restricted user for application runtime
+// Prefer restricted user for application runtime, fall back to POSTGRES_URL (Supabase/Vercel)
 const connectionString =
   process.env.DATABASE_RESTRICTED_URL ?? // Prefer restricted user
   process.env.DATABASE_URL ??
+  process.env.POSTGRES_URL ??
   (isTest ? 'postgres://user:pass@localhost:5432/testdb' : undefined)
 
 if (!connectionString) {
   throw new Error(
-    'DATABASE_URL or DATABASE_RESTRICTED_URL environment variable is not set'
+    'DATABASE_URL, DATABASE_RESTRICTED_URL, or POSTGRES_URL environment variable is not set'
   )
 }
 
@@ -45,11 +47,11 @@ if (isDevelopment) {
 
 // SSL configuration: Use environment variable to control SSL
 // DATABASE_SSL_DISABLED=true disables SSL completely (for local/Docker PostgreSQL)
-// Default is to enable SSL with certificate verification (for cloud databases like Neon, Supabase)
+// Default is to enable SSL (rejectUnauthorized: false for compatibility with Supabase pooler)
 const sslConfig =
   process.env.DATABASE_SSL_DISABLED === 'true'
     ? false // Disable SSL entirely for local PostgreSQL
-    : { rejectUnauthorized: true } // Enable SSL with verification for cloud DBs
+    : 'require' // Enable SSL for cloud DBs (Supabase, Neon, etc.)
 
 const client = postgres(connectionString, {
   ssl: sslConfig,
