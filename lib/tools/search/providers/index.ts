@@ -1,5 +1,6 @@
 import { SearchProvider } from './base'
 import { BraveSearchProvider } from './brave'
+import { DuckDuckGoSearchProvider } from './duckduckgo'
 import { ExaSearchProvider } from './exa'
 import { FirecrawlSearchProvider } from './firecrawl'
 import { SearXNGSearchProvider } from './searxng'
@@ -11,7 +12,22 @@ export type SearchProviderType =
   | 'searxng'
   | 'firecrawl'
   | 'brave'
-export const DEFAULT_PROVIDER: SearchProviderType = 'tavily'
+  | 'duckduckgo'
+
+/**
+ * Determine the default search provider based on available API keys.
+ * Falls back to DuckDuckGo (no API key needed) when nothing else is configured.
+ */
+function getDefaultProvider(): SearchProviderType {
+  if (process.env.TAVILY_API_KEY) return 'tavily'
+  if (process.env.EXA_API_KEY) return 'exa'
+  if (process.env.BRAVE_API_KEY) return 'brave'
+  if (process.env.FIRECRAWL_API_KEY) return 'firecrawl'
+  if (process.env.SEARXNG_API_URL) return 'searxng'
+  return 'duckduckgo'
+}
+
+export const DEFAULT_PROVIDER: SearchProviderType = getDefaultProvider()
 
 export function createSearchProvider(
   type?: SearchProviderType
@@ -30,13 +46,16 @@ export function createSearchProvider(
       return new BraveSearchProvider()
     case 'firecrawl':
       return new FirecrawlSearchProvider()
+    case 'duckduckgo':
+      return new DuckDuckGoSearchProvider()
     default:
-      // Default to TavilySearchProvider if an unknown provider is specified
-      return new TavilySearchProvider()
+      // Default to DuckDuckGo if no API keys are configured
+      return new DuckDuckGoSearchProvider()
   }
 }
 
 export { BraveSearchProvider } from './brave'
+export { DuckDuckGoSearchProvider } from './duckduckgo'
 export type { ExaSearchProvider } from './exa'
 export type { FirecrawlSearchProvider } from './firecrawl'
 export { SearXNGSearchProvider } from './searxng'
