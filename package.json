@@ -20,7 +20,7 @@
     "@ai-sdk/anthropic": "^3.0.33",
     "@ai-sdk/gateway": "^3.0.29",
     "@ai-sdk/google": "^3.0.18",
-    "@ai-sdk/groq": "^1.2.9",
+    "@ai-sdk/groq": "^3.0.23",
     "@ai-sdk/openai": "^3.0.23",
     "@ai-sdk/react": "^3.0.66",
     "@aws-sdk/client-s3": "^3.850.0",
