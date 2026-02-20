@@ -7,10 +7,10 @@ import { SearchMode } from '@/lib/types/search'
 import { isProviderEnabled } from '@/lib/utils/registry'
 
 const DEFAULT_MODEL: Model = {
-  id: 'openai/gpt-4.1-mini',
-  name: 'GPT-4.1 mini',
-  provider: 'AI Gateway',
-  providerId: 'gateway'
+  id: 'llama-3.3-70b-versatile',
+  name: 'Llama 3.3 70B',
+  provider: 'Groq',
+  providerId: 'groq'
 }
 
 const VALID_MODEL_TYPES: ModelType[] = ['speed', 'quality']

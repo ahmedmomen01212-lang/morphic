@@ -1,6 +1,7 @@
 import { anthropic } from '@ai-sdk/anthropic'
 import { createGateway } from '@ai-sdk/gateway'
 import { google } from '@ai-sdk/google'
+import { createGroq } from '@ai-sdk/groq'
 import { createOpenAI, openai } from '@ai-sdk/openai'
 import { createProviderRegistry, LanguageModel } from 'ai'
 import { createOllama } from 'ollama-ai-provider-v2'
@@ -10,6 +11,9 @@ const providers: Record<string, any> = {
   openai,
   anthropic,
   google,
+  groq: createGroq({
+    apiKey: process.env.GROQ_API_KEY
+  }),
   'openai-compatible': createOpenAI({
     apiKey: process.env.OPENAI_COMPATIBLE_API_KEY,
     baseURL: process.env.OPENAI_COMPATIBLE_API_BASE_URL
@@ -42,6 +46,8 @@ export function isProviderEnabled(providerId: string): boolean {
       return !!process.env.ANTHROPIC_API_KEY
     case 'google':
       return !!process.env.GOOGLE_GENERATIVE_AI_API_KEY
+    case 'groq':
+      return !!process.env.GROQ_API_KEY
     case 'openai-compatible':
       return (
         !!process.env.OPENAI_COMPATIBLE_API_KEY &&

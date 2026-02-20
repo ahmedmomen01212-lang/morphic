@@ -4,38 +4,38 @@
     "byMode": {
       "quick": {
         "speed": {
-          "id": "openai/gpt-4.1-mini",
-          "name": "GPT-4.1 mini",
-          "provider": "AI Gateway",
-          "providerId": "gateway"
+          "id": "llama-3.3-70b-versatile",
+          "name": "Llama 3.3 70B",
+          "provider": "Groq",
+          "providerId": "groq"
         },
         "quality": {
-          "id": "openai/gpt-4.1",
-          "name": "GPT-4.1",
-          "provider": "AI Gateway",
-          "providerId": "gateway"
+          "id": "llama-3.3-70b-versatile",
+          "name": "Llama 3.3 70B",
+          "provider": "Groq",
+          "providerId": "groq"
         }
       },
       "adaptive": {
         "speed": {
-          "id": "openai/gpt-4.1-mini",
-          "name": "GPT-4.1 mini",
-          "provider": "AI Gateway",
-          "providerId": "gateway"
+          "id": "llama-3.3-70b-versatile",
+          "name": "Llama 3.3 70B",
+          "provider": "Groq",
+          "providerId": "groq"
         },
         "quality": {
-          "id": "openai/gpt-4.1",
-          "name": "GPT-4.1",
-          "provider": "AI Gateway",
-          "providerId": "gateway"
+          "id": "llama-3.3-70b-versatile",
+          "name": "Llama 3.3 70B",
+          "provider": "Groq",
+          "providerId": "groq"
         }
       }
     },
     "relatedQuestions": {
-      "id": "openai/gpt-4.1-mini",
-      "name": "GPT-4.1 mini",
-      "provider": "AI Gateway",
-      "providerId": "gateway"
+      "id": "llama-3.3-70b-versatile",
+      "name": "Llama 3.3 70B",
+      "provider": "Groq",
+      "providerId": "groq"
     }
   }
 }
