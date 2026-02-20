@@ -13,23 +13,25 @@ const isTest = process.env.NODE_ENV === 'test'
 if (
   !process.env.DATABASE_URL &&
   !process.env.DATABASE_RESTRICTED_URL &&
+  !process.env.POSTGRES_URL &&
   !isTest
 ) {
   throw new Error(
-    'DATABASE_URL or DATABASE_RESTRICTED_URL environment variable is not set'
+    'DATABASE_URL, DATABASE_RESTRICTED_URL, or POSTGRES_URL environment variable is not set'
   )
 }
 
 // Connection with connection pooling for server environments
-// Prefer restricted user for application runtime
+// Prefer restricted user for application runtime, fall back to POSTGRES_URL (Supabase/Vercel)
 const connectionString =
   process.env.DATABASE_RESTRICTED_URL ?? // Prefer restricted user
   process.env.DATABASE_URL ??
+  process.env.POSTGRES_URL ??
   (isTest ? 'postgres://user:pass@localhost:5432/testdb' : undefined)
 
 if (!connectionString) {
   throw new Error(
-    'DATABASE_URL or DATABASE_RESTRICTED_URL environment variable is not set'
+    'DATABASE_URL, DATABASE_RESTRICTED_URL, or POSTGRES_URL environment variable is not set'
   )
 }
 
